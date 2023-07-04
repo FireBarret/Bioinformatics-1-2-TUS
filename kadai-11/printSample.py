@@ -1,0 +1,4 @@
+# coding: Shift-JIS
+
+# ”CˆÓ‚Ì•¶Í‚ğ•\¦‚³‚¹‚éƒvƒƒOƒ‰ƒ€ 
+print("Welcome To The Bioinfomatics World!!")
