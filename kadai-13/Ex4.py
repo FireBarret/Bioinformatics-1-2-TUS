@@ -9,4 +9,4 @@ def sub(y):
         print(m)
         return m * y    
 #メイン
-print(sub(4))
+print(sub(10))
