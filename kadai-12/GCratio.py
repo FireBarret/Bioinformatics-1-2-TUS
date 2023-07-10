@@ -1,24 +1,31 @@
-# coding: Shift-JIS
-import math
+f1 = 'ATGGCTATGATGGAGGTCCAGG'
+r1 = 'TTAGCCAACTAAAAAGGCCCCAAAAAAACTGG'
+r2 = 'TTATTTTGCGGCCCAGAGCCTTTTCATTCTTG'
 
-seq = "AGCTCGTACGTCATCATACCA"
-x = 0
-for i in range(0, len(seq)):
-    if seq[i] == "G" or seq[i] == "C":
-        x = x + 1
-    else:
-        x = x + 0
-GCper = round(x/len(seq)*100, 2)
-print("GC割合は"+ str(GCper)+ "%である。")  
+def GCratio(seq):
+    x = 0
+    for i in range(0, len(seq)):
+        if seq[i] == "G" or seq[i] == "C":
+            x = x + 1
+        else:
+            x = x + 0
+    GCper = round(x/len(seq)*100, 2)
+    return GCper
 
-# PCR反応について、あるプライマーに対してTm値を計算する。
-# Tm値は、プライマーの塩基配列の長さによって変化する
-# Tm値の計算式は Tm= 81.5+(16.6*(log10(塩濃度)))+(0.41*GC割合)-(500/プライマリーの長さ)
+def tmvalue(seq):
+    Tm = round(81.5 + (16.6 * (-1.3)) + (0.41 * GCratio(seq)) - (500/len(seq)), 2)
+    return Tm
 
-# input は　str であるため、floatに変換する必要がある。
-# log10はmath.log10()で計算できる。
-salt = math.log10(float(input('Please insert salt concentration(M))')))
+def optimal_tm(seq):
+    newseq = seq
+    opt_val_list = []
+    for nuc in range(12):
+        print(str(nuc) , str(round(tmvalue(newseq),2)), str(round(tmvalue(newseq)-59.56, 2)))
+        opt_val_list.append(round(tmvalue(newseq)-59.56, 2))
+        newseq = newseq[:-1]
+    optimal_val = min(opt_val_list)
+    print('The optimal value is ' + str(opt_val_list.index(optimal_val)))
+    return optimal_val
 
-Tm = round(81.5 + (16.6 * salt) + (0.41 * GCper) - (500/len(seq)), 2)
-print("Tm値は"+str(Tm)+"°Cである。")
-print("Annealing 温度は"+str(round(Tm-3))+"°Cである。")
+print(optimal_tm(r1))
+print(optimal_tm(r2))

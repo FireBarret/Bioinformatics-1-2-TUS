@@ -1,5 +1,3 @@
-# coding: Shift-JIS
-
 array = [56,23,10,97,51,70,9,32,12,43]
 
 max = array[0]
@@ -27,6 +25,3 @@ print(min)
 print(avg)
 print(even)
 print(odd)
-#����������ҏW���Ă��������B
-
-

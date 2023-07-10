@@ -8,5 +8,6 @@ fn main() {
         } else {
             println!("☆");
         }
+
     }
 }
